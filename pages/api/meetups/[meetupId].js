@@ -1,7 +1,7 @@
 import { MongoClient } from "mongodb";
 import { ObjectId } from "mongodb";
 
-const handler = async (req, res) => {
+async function handler(req, res) {
   const client = await MongoClient.connect(
     "mongodb+srv://almsrr:MHDMJly7TXmaXMwa@cluster0.hccog.mongodb.net/meetups?retryWrites=true&w=majority"
   );
@@ -32,6 +32,6 @@ const handler = async (req, res) => {
   } else {
     res.status(501);
   }
-};
+}
 
 export default handler;

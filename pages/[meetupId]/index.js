@@ -35,7 +35,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
   const meetupId = context.params.meetupId;
-  const url = `http://localhost:3000/api/meetups/${meetupId}`;
+  const url = `/api/meetups/${meetupId}`;
 
   const response = await axios.get(url);
   const selectedMeetup = response.data;

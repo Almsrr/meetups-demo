@@ -21,7 +21,7 @@ function Home(props) {
 
 export async function getStaticProps(context) {
   // const response = await fetch("/api/meetups");
-  const response = await axios.get("http://localhost:3000/api/meetups");
+  const response = await axios.get("/api/meetups");
   const loadedMeetups = response.data;
 
   return {
