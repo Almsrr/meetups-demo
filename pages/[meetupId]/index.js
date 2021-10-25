@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import Head from "next/head";
 import axios from "axios";
+import { server } from "../config";
 
 import MeetupDetail from "../../components/meetups/MeetupDetail";
 
@@ -22,7 +23,9 @@ function Detail(props) {
 }
 
 export async function getStaticPaths() {
-  const response = await axios.get("http://localhost:3000/api/meetups");
+  const url = `${server}/api/meetups`;
+
+  const response = await axios.get(url);
   const meetups = response.data;
 
   return {
@@ -35,7 +38,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
   const meetupId = context.params.meetupId;
-  const url = `/api/meetups/${meetupId}`;
+  const url = `${server}/api/meetups/${meetupId}`;
 
   const response = await axios.get(url);
   const selectedMeetup = response.data;
