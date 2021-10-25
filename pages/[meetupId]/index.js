@@ -1,7 +1,6 @@
 import { Fragment } from "react";
 import Head from "next/head";
-import axios from "axios";
-import { server } from "../config";
+import { getAllMeetups, getMeetup } from "../../mongo/methods";
 
 import MeetupDetail from "../../components/meetups/MeetupDetail";
 
@@ -23,10 +22,7 @@ function Detail(props) {
 }
 
 export async function getStaticPaths() {
-  const url = `${server}/api/meetups`;
-
-  const response = await axios.get(url);
-  const meetups = response.data;
+  const meetups = await getAllMeetups();
 
   return {
     fallback: "blocking",
@@ -38,10 +34,8 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
   const meetupId = context.params.meetupId;
-  const url = `${server}/api/meetups/${meetupId}`;
+  const selectedMeetup = await getMeetup(meetupId);
 
-  const response = await axios.get(url);
-  const selectedMeetup = response.data;
   return {
     props: {
       selectedMeetup,

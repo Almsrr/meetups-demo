@@ -9,7 +9,7 @@ function NewMeetup() {
   const router = useRouter();
 
   const addMeetupHandler = async (newMeetup) => {
-    const response = await axios.post("/api/meetups", newMeetup);
+    const response = await axios.post("/api/new-meetup", newMeetup);
 
     if (response.status === 201) {
       alert("Meetup inserted successfully");

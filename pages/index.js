@@ -1,9 +1,8 @@
 import Head from "next/head";
 import { Fragment } from "react";
-import axios from "axios";
-import { server } from "./config";
 
 import MeetupsList from "../components/meetups/MeetupList";
+import { getAllMeetups } from "../mongo/methods";
 
 function Home(props) {
   return (
@@ -20,11 +19,8 @@ function Home(props) {
   );
 }
 
-export async function getStaticProps(context) {
-  const url = `${server}/api/meetups`;
-
-  const response = await axios.get(url);
-  const loadedMeetups = response.data;
+export async function getStaticProps() {
+  const loadedMeetups = await getAllMeetups();
 
   return {
     props: { meetups: loadedMeetups },
